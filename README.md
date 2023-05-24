@@ -25,7 +25,7 @@ For the most useful coders, I think we can do NPC on their behalf.
 
 -------------------------------------------
 
-Python 11
+Python 3.11
 
 -------------------------------------------
 
