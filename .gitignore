@@ -164,5 +164,9 @@ cython_debug/
 Test/
 test.py
 
+# pickle file
+*.pickle
+*.pkl
+
 # backup file
 *.bak
