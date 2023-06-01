@@ -6,10 +6,21 @@ from Game.Player.Skill import Skill
 from os import system, name 
 
 
+# Constant
 DIFFICULTY_LIST = ["G", "F", "E", "D", "C", "B", "A", "S", "2S", "3S"]
 RARITY_LIST = ["G", "F", "E", "D", "C", "B", "A", "S", "2S", "3S"]
+MAIN_MENU_CHOICE = {
+    1: "Add a player",
+    2: "Delete a player",
+    3: "Display all player",
+    4: "Display a player",
+    5: "Display all combine",
+    6: "Do a backup",
+    9: "Exit"
+}
 
 
+# Genral part
 def choose_name(nameList: list[str]) -> str:
     while True:
         name_ = input("Enter your pseudo: ")
@@ -17,8 +28,54 @@ def choose_name(nameList: list[str]) -> str:
             return name_
 
 
+def clear_output() -> None:
+    if name == 'nt':
+        system('cls')
+    else:
+        system('clear')
 
-def add_player(nameList: list[str], playerList: list[Player]) -> None:
+
+def load_all_combine() -> int:
+    i = 0
+    for class_ in CLASS_LIST:
+        for race_ in RACE_LIST:
+            print(f"A {race_} of class: {class_}")
+            i+=1
+    return i
+
+def exitAll(Player_list: list[Player]):
+    db.save(Player_list)
+    db.disconnect()
+    print("Goodbye!")
+    exit(0)
+
+
+def displayList(dico: dict) -> None:
+    for key, value in dico.items():
+        print(f"{key}: {value}")
+
+
+
+# Menu part
+def mainMenu():
+    displayList(MAIN_MENU_CHOICE)
+
+    while True:
+        choose = input("Enter your choice: ")
+        
+        if not choose.isnumeric():
+            print("Please enter a number")
+            continue
+
+        choose = int(choose)
+        if choose in MAIN_MENU_CHOICE.keys():
+            return choose
+
+
+
+# Player part
+def add_player(playerList: list[Player], nameList: list[str]) -> None:
+    clear_output()
     name = choose_name(nameList)
     
     clear_output()        
@@ -29,9 +86,13 @@ def add_player(nameList: list[str], playerList: list[Player]) -> None:
 
     nameList.append(name)
     playerList.append(Player(name, Class(class_chooser), Race(race_chooser)))
+    
+    print(f"Welcome to the game {name}!")
+    print(f"You are now a {race_chooser} {class_chooser}")
 
 
-def suppr_player(nameList: list[str], playerList: list[Player]):
+def suppr_player(playerList: list[Player], nameList: list[str]):
+    clear_output()
     player_name = input("Enter a player name: ")
     if player_name not in nameList:
         return 1
@@ -41,7 +102,7 @@ def suppr_player(nameList: list[str], playerList: list[Player]):
         return 0
 
 
-def get_player(nameList: list[str], playerList: list[Player]):
+def get_player(playerList: list[Player], nameList: list[str]):
     while True:
         name = input("Enter a player name[q to quit]: ")
         if name in nameList:
@@ -53,57 +114,22 @@ def get_player(nameList: list[str], playerList: list[Player]):
     return 0
 
 
-def print_player(Player: Player):
-    print(f"{Player.get_name()} is level is {Player.get_level()} and he have {Player.get_stat_point()} stat points\n")
 
-
-def print_all_player(playerList: list[Player]) -> None:
-    print("Player:\n")
-    for Player in playerList:
-        print_player(Player)
-    return len(playerList)
+def print_all_player(nameList: list[str]) -> None:
+    print("\nPlayer:\n")
+    for name in nameList:
+        print(name)
+    return len(nameList)
 
 
 def generate_list_name(playerList: list[Player]):
     return [player.get_name() for player in playerList]
 
 
-
-def clear_output() -> None:
-    if name == 'nt':
-        system('cls')
-    else:
-        system('clear')
-
-
-
-def load_all_combine() -> int:
-    i = 0
-    for class_ in CLASS_LIST:
-        for race_ in RACE_LIST:
-            print(f"A {race_} of class: {class_}")
-            i+=1
-    return i
-
-
-
-def display_player(nameList: list[str], playerList: list[Player]) -> None:
-    player = get_player(nameList, playerList)
+def display_player(playerList: list[Player], nameList: list[str]) -> None:
+    player: Player = get_player(playerList, nameList)
 
     if player == 0:
         print("Operation cancelled by the user")
     else:
-        player_name_long = len(player.nme)-1
-        print("\n=============="+"="*(player_name_long))
-        print(f"Player name: {player.name}")
-        print("--------------"+"-"*(player_name_long))
-        print("Health Point: {}".format(player.stats["HP"]))
-        print("Mana Point: {}".format(player.stats["MP"]))
-        print("Strenght: {}".format(player.stats["STR"]))
-        print("Defense: {}".format(player.stats["DEF"]))
-        print("Agility: {}".format(player.stats["AG"]))
-        print("Dodge: {}".format(player.stats["DODG"]))
-        print("Intelligence: {}".format(player.stats["INT"]))
-        print("Wisdom: {}".format(player.stats["WIS"]))
-        print("Luck: {}".format(player.stats["LUK"]))
-        print("=============="+"="*(player_name_long)+"\n")
+        player.display()

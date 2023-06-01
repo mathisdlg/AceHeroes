@@ -9,46 +9,36 @@ if __name__ == '__main__':
     Player_list:list = []
     Player_list = db.loading()
     
-    Name_list = generate_list_name(Player_list)
+    Name_list = []
+    if len(Player_list) != 0:
+        Name_list = generate_list_name(Player_list)
+        
     
     clear_output()
 
     while True:
-        choose = int(input("\n[1] - New character\n[2] - Remove a character\n[3] - Save changes\n[4] - Load Player\n[5] - Print all player\n[6] - Display a player\n[8] - See all Class Race combination\n[9] - Exit\n"))
+        choose = mainMenu()
         
-        if choose == 1:
-            add_player(Name_list, Player_list)
+        match choose:
+            case 1:
+                add_player(Player_list, Name_list)
+            case 2:
+                suppr_player(Player_list, Name_list)
+            case 3:
+                print(print_all_player(Name_list), "players")
+            case 4:
+                display_player(Player_list, Name_list)
+            case 5:
+                load_all_combine()
+            case 6:
+                db.backup()
+                print("Backup done")
+            case 9:
+                db.save(Player_list)
+                db.disconnect()
+                break
 
-        elif choose == 2:
-            if suppr_player(Name_list, Player_list) == 0:
-                print("Player has been deleted\n")
-            else:
-                print("Error: Player cannot be found\n")
 
-        elif choose == 3:
-            db.save(Player_list)
-            print("Changes saved!")
-
-        elif choose == 4:
-            Player_list = db.loading()
-            print("Player load!")
-
-        elif choose == 5:
-            print_all_player(Player_list)
-        
-        elif choose == 6:
-            display_player(Player_list, Name_list)
-
-        elif choose == 8:
-            print(f"{load_all_combine()} possilities")
-
-        elif choose == 9:
-            print("Exit...")
-            break
-        
         input("Press in enter to continue...")
         clear_output()
-
-    db.save(Player_list)
-    db.disconnect()
-    print("Goodbye!")
+    print("See you soon !")
