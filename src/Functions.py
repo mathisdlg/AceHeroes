@@ -70,6 +70,9 @@ def mainMenu():
         choose = int(choose)
         if choose in MAIN_MENU_CHOICE.keys():
             return choose
+        else:
+            print("Invalid choice")
+            continue
 
 
 
