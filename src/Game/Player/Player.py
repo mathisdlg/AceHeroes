@@ -1,6 +1,7 @@
 from Game.Player.Class import Class
 from Game.Player.Race import Race
 from Game.Player.Clan import Clan
+import hashlib
 
 
 class Player:
@@ -24,7 +25,7 @@ class Player:
         - clan
 
     """
-    def __init__(self, playerName: str, classe: Class, race: Race):
+    def __init__(self, playerName: str, classe: Class, race: Race, password: _hashlib.HASH.hexdigest):
         self.name: str = playerName
         self.classe: Class = classe
         self.race: Race = race
@@ -33,6 +34,7 @@ class Player:
         self.stats: dict = {"HP": 100, "MP": 10, "STR": 1, "DEF":10, "AG": 1, "DODG": 1, "INT": 1, "WIS": 1, "LUK": 1}
         self.hiddenStats: dict = {"ATKRNG": 1}
         self.clan: Clan|None = None
+        self._password: _hashlib.HASH.hexdigest = ""
     
     def __str__(self) -> str:
         return self.name
