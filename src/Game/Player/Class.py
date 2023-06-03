@@ -1,4 +1,4 @@
-CLASS_LIST = ['Thief', 'Priest', 'Mage', 'Figther', 'Paladin', 'Ranger', 'Druid', 'Black Mage', 'Labyrinths Master', 'Berserker', 'Assassin', 'Bard', 'Cleric', 'Hunter', 'Villager', 'Beast Master', 'Artificer', 'Craftsman', 'Alchemist', 'Wizard', 'Bettor', 'Dragon Slayer', 'Blacksmith', 'Necromancer', 'Warlock', 'Elementalist', 'Ninja', 'Monk', 'Crusader', 'Demolitionist']
+CLASS_LIST = ['Thief', 'Priest', 'Mage', 'Figther', 'Paladin', 'Ranger', 'Druid', 'Black Mage', 'Labyrinths Master', 'Berserker', 'Assassin', 'Bard', 'Cleric', 'Hunter', 'Villager', 'Beast Master', 'Artificer', 'Craftsman', 'Alchemist', 'Wizard', 'Bettor', 'Dragon Slayer', 'Blacksmith', 'Necromancer', 'Elementalist', 'Ninja', 'Monk', 'Crusader', 'Demolitionist']
 
 
 def display_classes() -> None:

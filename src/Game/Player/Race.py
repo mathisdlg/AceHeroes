@@ -1,4 +1,4 @@
-RACE_LIST = ['Human', 'Elf', 'Dwarf', 'Vampire', 'Fairy', 'Leprechaun', 'Orc', 'Halfelin', 'Dragon', 'Robot', 'Cyborg', 'Zombie', 'Cyclops', 'Giant', 'Black Elf', 'Half-Demon', 'Troll', 'Metamorph']
+RACE_LIST = ['Human', 'Elf', 'Dwarf', 'Vampire', 'Fairy', 'Leprechaun', 'Orc', 'Halfelin', 'Dragon', 'Robot', 'Cyborg', 'Zombie', 'Cyclops', 'Giant', 'Black Elf', 'Demon', 'Troll', 'Metamorph']
 
 
 def display_races() -> None:
