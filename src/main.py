@@ -12,9 +12,6 @@ if __name__ == '__main__':
     Name_list = []
     if len(Player_list) != 0:
         Name_list = generate_list_name(Player_list)
-        
-    
-    clear_output()
 
     while True:
         choose = mainMenu()
