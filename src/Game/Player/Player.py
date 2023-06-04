@@ -1,6 +1,7 @@
 from Game.Player.Class import Class
 from Game.Player.Race import Race
 from Game.Player.Clan import Clan
+import getpass
 import hashlib
 
 
@@ -25,7 +26,7 @@ class Player:
         - clan
 
     """
-    def __init__(self, playerName: str, classe: Class, race: Race, password: _hashlib.HASH.hexdigest):
+    def __init__(self, playerName: str, classe: Class, race: Race, password):
         self.name: str = playerName
         self.classe: Class = classe
         self.race: Race = race
@@ -81,11 +82,59 @@ class Player:
     
     def win_stat_point(self, nb: int) -> None:
         self.stat_point += nb
+
+
+    def changeName(self, newName: str) -> None:
+        self.name = newName
+
+    def changePassword(self, oldPassword, newPassword) -> int:
+        if oldPassword != self._password:
+            return 1
+        else:
+            self._password = newPassword
+            return 0
     ########################################################
 
 
     ########################################################
     #                   Other methods                      #
+    def editPlayer(self, listName: list) -> list:
+        CHANGES = ["Name", "Password"]
+
+        print("0: Exit")
+        for i in len(CHANGES):
+            print(f"{i+1}: {CHANGES[i]}")
+
+        while True:
+            choice = input(">>> ")
+            if choice.isdigit():
+                match int(choice):
+                    case 0:
+                        return listName
+                    case 1:
+                        newName = input("New name: ")
+                        if newName != "" and newName not in listName:
+                            listName.remove(self.name)
+                            self.changeName(newName)
+                            listName.append(newName)
+                    case 2:
+                        oldPassword = hashlib.sha256(getpass.getpass("Old password: ").encode()).hexdigest()
+                        while True:
+                            newPassword = hashlib.sha256(getpass.getpass("New password: ").encode()).hexdigest()
+                            confirmNewPassword = hashlib.sha256(getpass.getpass("Confirm new password: ").encode()).hexdigest()
+                            if newPassword == confirmNewPassword:
+                                if (self.changePassword(oldPassword, newPassword) == 0):
+                                    print("Password changed")
+                                    break
+                                else:
+                                    print("Old password not match")
+                                    break
+                            else:
+                                print("Password not match")
+                                continue
+                    case _:
+                        print("Invalid choice")
+
     def duel(self, opponent: "Player"):
         pass #TODO
     

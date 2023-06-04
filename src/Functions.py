@@ -2,6 +2,8 @@ from Game.Player.Class import Class, CLASS_LIST, choose_class
 from Game.Player.Race import Race, RACE_LIST, choose_race
 from Game.Player.Player import Player
 from Game.Player.Skill import Skill
+import hashlib as hl
+import getpass
 
 from os import system, name 
 
@@ -86,9 +88,19 @@ def add_player(playerList: list[Player], nameList: list[str]) -> None:
     
     clear_output()
     class_chooser = choose_class()
+    
+    clear_output()
+    while True:
+        password: hashlib._Hash.hexdigest = hl.sha256(getpass.getpass("Enter your password: ").encode()).hexdigest()
+        confirm = hl.sha256(getpass.getpass("Confirm your password: ").encode()).hexdigest()
+        if password == confirm:
+            break
+        else:
+            print("Password not match")
+    
 
     nameList.append(name)
-    playerList.append(Player(name, Class(class_chooser), Race(race_chooser)))
+    playerList.append(Player(name, Class(class_chooser), Race(race_chooser), password))
     
     print(f"Welcome to the game {name}!")
     print(f"You are now a {race_chooser} {class_chooser}")
