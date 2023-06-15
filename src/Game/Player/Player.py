@@ -36,6 +36,7 @@ class Player:
         self.hiddenStats: dict = {"ATKRNG": 1}
         self.clan: Clan|None = None
         self._password: _hashlib.HASH.hexdigest = ""
+        self.connected: bool = False
     
     def __str__(self) -> str:
         return self.name
@@ -98,6 +99,17 @@ class Player:
 
     ########################################################
     #                   Other methods                      #
+    def connect(self, password: _hashlib.HASH.hexdigest) -> bool:
+        if self._connected:
+            return False
+        else:
+            self._connected = self._password == password
+            return self._connected
+
+    def disconnect(self) -> None:
+        self._connected = False
+        
+
     def editPlayer(self, listName: list) -> list:
         CHANGES = ["Name", "Password"]
 
@@ -146,7 +158,7 @@ class Player:
         player_stats = self.stats
 
         print("\n=============="+"="*(player_name_long))
-        print(f"Player name: {self.name}")
+        print(f"Player name: {self.name} lv.{self.level} ({self.race} {self.classe}))")
         print("--------------"+"-"*(player_name_long))
         print("Health Point: {}".format(player_stats["HP"]))
         print("Mana Point: {}".format(player_stats["MP"]))
