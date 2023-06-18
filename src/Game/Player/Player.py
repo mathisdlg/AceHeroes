@@ -154,12 +154,13 @@ class Player:
         pass
     
     def display(self):
-        player_name_long = len(self.name)-1
+        playerInf = f"{self.name} lv.{self.level} ({self.race} {self.classe})"
+        longSup = len(playerInf)-1
         player_stats = self.stats
 
-        print("\n=============="+"="*(player_name_long))
-        print(f"Player name: {self.name} lv.{self.level} ({self.race} {self.classe}))")
-        print("--------------"+"-"*(player_name_long))
+        print("\n=============="+"="*(longSup))
+        print(f"Player name: {playerInf}")
+        print("--------------"+"-"*(longSup))
         print("Health Point: {}".format(player_stats["HP"]))
         print("Mana Point: {}".format(player_stats["MP"]))
         print("Strenght: {}".format(player_stats["STR"]))
@@ -169,5 +170,5 @@ class Player:
         print("Intelligence: {}".format(player_stats["INT"]))
         print("Wisdom: {}".format(player_stats["WIS"]))
         print("Luck: {}".format(player_stats["LUK"]))
-        print("=============="+"="*(player_name_long)+"\n")
+        print("=============="+"="*(longSup)+"\n")
     ########################################################
