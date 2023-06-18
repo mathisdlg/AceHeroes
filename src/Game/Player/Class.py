@@ -24,3 +24,6 @@ class Class:
     def __init__(self, name: str):
         self.class_name = name
         self.class_level = 0
+    
+    def __format__(self, format_spec: str) -> str:
+        return self.class_name
