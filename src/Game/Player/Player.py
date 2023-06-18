@@ -33,9 +33,9 @@ class Player:
         self.level: int = 0
         self.stat_point: int = 0
         self.stats: dict = {"HP": 100, "MP": 10, "STR": 1, "DEF":10, "AG": 1, "DODG": 1, "INT": 1, "WIS": 1, "LUK": 1}
-        self.hiddenStats: dict = {"ATKRNG": 1}
+        self._hiddenStats: dict = {"ATKRNG": 1}
         self.clan: Clan|None = None
-        self._password: _hashlib.HASH.hexdigest = ""
+        self._password: str = ""
         self.connected: bool = False
     
     def __str__(self) -> str:
@@ -99,7 +99,7 @@ class Player:
 
     ########################################################
     #                   Other methods                      #
-    def connect(self, password: _hashlib.HASH.hexdigest) -> bool:
+    def connect(self, password: str) -> bool:
         if self._connected:
             return False
         else:
