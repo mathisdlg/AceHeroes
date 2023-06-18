@@ -32,7 +32,7 @@ class Player:
         self.race: Race = race
         self.level: int = 0
         self.stat_point: int = 0
-        self.stats: dict = {"HP": 100, "MP": 10, "STR": 1, "DEF":10, "AG": 1, "DODG": 1, "INT": 1, "WIS": 1, "LUK": 1}
+        self.stats: dict = {"HP": 100, "MP": 10, "STR": 1, "DEF":1, "AG": 1, "DODG": 1, "INT": 1, "WIS": 1, "LUK": 1}
         self._hiddenStats: dict = {"ATKRNG": 1}
         self.clan: Clan|None = None
         self._password: str = ""
